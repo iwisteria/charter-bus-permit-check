@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貸切バス許可新規取得可能性チェックリスト</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans CJK JP', sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background: #ffffff;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            color: #1a202c;
+            margin-bottom: 0;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .header h1 {
+            font-size: 2.75rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #2d3748;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            color: #718096;
+            font-weight: 400;
+        }
+
+        .content {
+            background: white;
+            padding: 48px;
+            margin: 0;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            padding: 4px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .tab-button {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 16px 24px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            color: #6c757d;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #495057;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            border: 1px solid #dee2e6;
+        }
+
+        .tab-button:hover:not(.active) {
+            background: rgba(255,255,255,0.6);
+            color: #495057;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #2d3748;
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e2e8f0;
+            letter-spacing: -0.01em;
+        }
+
+        .section h3 {
+            color: #4a5568;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 32px 0 20px 0;
+        }
+
+        .checklist {
+            background: #fafafa;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .checklist h4 {
+            color: #2d3748;
+            margin-bottom: 16px;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            margin-bottom: 12px;
+            padding-left: 32px;
+            position: relative;
+            color: #4a5568;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .alert {
+            background: #fffbeb;
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .alert h4 {
+            color: #92400e;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .document-list {
+            background: #f0f9ff;
+            border: 1px solid #e0f2fe;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .document-list h4 {
+            color: #0c4a6e;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .document-list ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .document-list li {
+            margin-bottom: 10px;
+            color: #374151;
+        }
+
+        .process-timeline {
+            margin: 30px 0;
+        }
+
+        .timeline-item {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid #6366f1;
+            position: relative;
+        }
+
+        .timeline-item h4 {
+            color: #4338ca;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .photo-requirements {
+            background: #f0fdf4;
+            border: 1px solid #dcfce7;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .photo-requirements h4 {
+            color: #15803d;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .responsibility-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .responsibility-table th,
+        .responsibility-table td {
+            border: 1px solid #e5e7eb;
+            padding: 16px;
+            text-align: left;
+        }
+
+        .responsibility-table th {
+            background: #f9fafb;
+            color: #374151;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .responsibility-table tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .responsibility-table tr:hover {
+            background: #f3f4f6;
+        }
+
+        .checkmark {
+            color: #10b981;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.125rem;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.25rem;
+            }
+            
+            .content {
+                padding: 24px 20px;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                gap: 2px;
+            }
+            
+            .tab-button {
+                text-align: left;
+                border-radius: 8px;
+            }
+            
+            .checklist, .document-list, .photo-requirements, .alert {
+                padding: 16px;
+            }
+            
+            .responsibility-table {
+                font-size: 0.875rem;
+            }
+            
+            .responsibility-table th,
+            .responsibility-table td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>貸切バス許可新規取得可能性チェックリスト</h1>
+            <p>許可取得から運輸開始までの完全ガイド</p>
+        </div>
+
+        <div class="content">
+            <div class="nav-tabs">
+                <button class="tab-button active" onclick="showTab('check')">確認事項</button>
+                <button class="tab-button" onclick="showTab('documents')">必要書類</button>
+                <button class="tab-button" onclick="showTab('preparation')">許可前準備</button>
+                <button class="tab-button" onclick="showTab('after-permit')">許可後手続き</button>
+                <button class="tab-button" onclick="showTab('notification')">運輸開始届</button>
+            </div>
+
+            <!-- 確認事項タブ -->
+            <div id="check" class="tab-content active">
+                <div class="section">
+                    <h2>新規許可取得可能性の確認事項</h2>
+                    
+                    <div class="checklist">
+                        <h4>1.1 法令試験を受験する代表権を有する役員</h4>
+                        <ul>
+                            <li>日本国内で会社を経営する資格があるか</li>
+                            <li>法令試験の文章を理解し解答できるだけの日本語の能力があるか</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>1.2 安全統括管理者</h4>
+                        <ul>
+                            <li>緑ナンバーのバス事業者で、運行管理者か整備管理者または役員などでの3年の実務経験がある人はいるか</li>
+                            <li>その会社から証明書をもらうことができるか</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>1.3 資金</h4>
+                        <ul>
+                            <li>資金計画の必要額以上の銀行預金か若しくは流動資産はあるか</li>
+                            <li>足りなければ増資はできるか</li>
+                            <li>申請直前に残高証明書を取得した金額を許可まで減らすことなくキープしなければならないことを理解しているか</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>1.4 運行管理者</h4>
+                        <ul>
+                            <li>2人以上確保しているか</li>
+                            <li>資格者証を持っているか</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>1.5 整備管理者</h4>
+                        <ul>
+                            <li>１人以上確保できているか</li>
+                            <li>整備士であり、合格証書を持っているか</li>
+                            <li>２年の実務経験があって、それをその会社が証明してくれるか</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>1.6 営業区域</h4>
+                        <ul>
+                            <li>営業所の所在する都府県が営業区域であることを理解しているか</li>
+                            <li>区域外営業について理解しているか</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>1.7 営業所</h4>
+                        <ul>
+                            <li>自己所有か借入か</li>
+                            <li>事業を行うに足る規模を有しているか</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>1.8 車庫</h4>
+                        <ul>
+                            <li>所有か借入か</li>
+                            <li>面積</li>
+                            <li>前面道路は公道か私道か</li>
+                            <li>道路と車庫の間に水路などはないか</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>1.9 車両</h4>
+                        <ul>
+                            <li>自己所有か借入か</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>1.10 運転者</h4>
+                        <ul>
+                            <li>申請車両数以上の人数か</li>
+                            <li>申請車両を運転できる免許か</li>
+                            <li>住所は通勤可能な距離にあるか</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert">
+                        <h4>注意事項</h4>
+                        <p>このチェックリストは、あくまでも新規許可の取得可能性をリストアップしたものです。すべての項目を満たしていても、許可が取得できることを保証するものではありません。実際の申請にあたっては、初回無料相談をご利用ください。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 必要書類タブ -->
+            <div id="documents" class="tab-content">
+                <div class="section">
+                    <h2>必要書類の一覧と詳細</h2>
+                    
+                    <div class="document-list">
+                        <h4>車両関連書類</h4>
+                        <ul>
+                            <li>計画する事業用自動車の使用権原を証する書面</li>
+                            <li>自動車検査証または自動車検査証記録事項</li>
+                            <li>売買契約書（写）、売渡承諾書（写）</li>
+                            <li>リース契約書（写）</li>
+                        </ul>
+                        <p><strong>※事業用自動車の使用権原を証する書面それぞれに番号を記載すること</strong></p>
+                    </div>
+
+                    <div class="document-list">
+                        <h4>資金関連書類</h4>
+                        <ul>
+                            <li>臨時総会議事録</li>
+                            <li>増資計画表</li>
+                            <li>出資金引受証</li>
+                            <li>預金残高証明書（原本）</li>
+                        </ul>
+                    </div>
+
+                    <div class="document-list">
+                        <h4>施設関連書類</h4>
+                        <ul>
+                            <li>不動産登記簿謄本等</li>
+                            <li>賃貸借契約書（写）等</li>
+                        </ul>
+                    </div>
+
+                    <div class="document-list">
+                        <h4>会社関連書類</h4>
+                        <ul>
+                            <li>定款又は寄付行為</li>
+                            <li>登記事項証明書</li>
+                            <li>最近の事業年度における貸借対照表</li>
+                            <li>役員又は社員の履歴書</li>
+                        </ul>
+                    </div>
+
+                    <div class="document-list">
+                        <h4>人的要件関連書類</h4>
+                        <ul>
+                            <li>証明印のある安全統括管理者の資格要件を証する書類</li>
+                            <li>運行管理者の資格要件を証する書類</li>
+                            <li>整備管理者の資格要件を証する書類</li>
+                            <li>運転者予定名簿、免許証（写）</li>
+                        </ul>
+                    </div>
+
+                    <div class="document-list">
+                        <h4>保険・社会保険関連書類</h4>
+                        <ul>
+                            <li>任意保険又は共済に計画車両の全てが加入する計画があることを証する書類</li>
+                            <li>社会保険等加入義務者が社会保険等に加入していることを証しする書面</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 許可前準備タブ -->
+            <div id="preparation" class="tab-content">
+                <div class="section">
+                    <h2>許可前の準備</h2>
+
+                    <div class="alert">
+                        <h4>大前提</h4>
+                        <ul>
+                            <li>以下の事項がすべて完了するまで運輸開始はできない</li>
+                            <li>不完全な状態で運輸を開始すると最初の監査で必ず車両停止以上の行政処分を受ける</li>
+                            <li>登録免許税の納付と納付届、運行管理者整備管理者選任届を提出しないと事業用自動車等連絡書を経由してもらえない</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>事業者関連</h4>
+                        <ul>
+                            <li>乗務員の勤務時間及び乗務時間を制定する（運輸規則第21条）</li>
+                            <li>就業規則（給与規程）の作成（就業規則の届出）</li>
+                            <li>36協定の届出</li>
+                            <li>社会保険の加入</li>
+                            <li>労働時間、運転時間管理表</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>営業所関連</h4>
+                        <ul>
+                            <li>什器備品の設置</li>
+                            <li>PCを設置し、メールの送受信が可能な環境を整える</li>
+                            <li>点呼動画の撮影環境の整備（アルコールチェックの様子を撮影）（動画は90日保存）</li>
+                            <li>運行管理システム（デジタコ・ドラレコなど）の導入</li>
+                            <li>安全管理規程の作成</li>
+                            <li>運行管理規程の作成</li>
+                            <li>整備管理規程の作成</li>
+                            <li>乗務員服務規律の作成</li>
+                            <li>自動車点検基準の策定</li>
+                            <li>事故記録簿の作成（事故処理規程の作成）</li>
+                            <li>苦情処理簿の作成（苦情処理規程の策定）</li>
+                            <li>車両台帳の作成</li>
+                            <li>日常点検記録簿の作成</li>
+                            <li>定期点検整備計画、定期点検整備記録簿の作成</li>
+                            <li>運送引受書の準備（3年保存）</li>
+                            <li>運行指示書の準備（3年保存）</li>
+                            <li>点呼記録の準備（電子ファイル必須）</li>
+                            <li>業務記録の準備（3年保存）</li>
+                            <li>安全統括管理者選任届書の準備</li>
+                            <li>運行管理者整備管理者選任届書の準備</li>
+                            <li>運賃料金設定届書の準備</li>
+                            <li>運賃料金表・標準運送約款の準備</li>
+                            <li>運転者等指導監督計画および記録簿</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>車庫関連</h4>
+                        <ul>
+                            <li>点検器具工具</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>自動車関連</h4>
+                        <ul>
+                            <li>車両の事業用架装</li>
+                            <li>事業用自動車の車検、登録</li>
+                            <li>デジタコ・ドラレコなどの取り付け</li>
+                            <li>車内表示（事業者名,自動車登録番号）：乗客が見やすい場所に設置</li>
+                            <li>車体表示：会社名と「貸切」の表示</li>
+                        </ul>
+                    </div>
+
+                    <div class="checklist">
+                        <h4>運転者関連</h4>
+                        <ul>
+                            <li>健康診断の受診</li>
+                            <li>適性診断（初任）の受診</li>
+                            <li>初任運転者教育の実施</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 許可後手続きタブ -->
+            <div id="after-permit" class="tab-content">
+                <div class="section">
+                    <h2>許可後から運輸開始までにすること</h2>
+                    
+                    <table class="responsibility-table">
+                        <thead>
+                            <tr>
+                                <th>項目</th>
+                                <th>事業者</th>
+                                <th>行政書士</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>許可書の受領</td>
+                                <td class="checkmark">✓</td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>登録免許税の納付</td>
+                                <td class="checkmark">✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>登録免許税納付届の提出</td>
+                                <td></td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>運行管理者と整備管理者の選任届の届出</td>
+                                <td></td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>運賃料金設定届の届出</td>
+                                <td></td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>安全統括管理者選任届の届出</td>
+                                <td></td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>安全管理規程設定届の届出</td>
+                                <td></td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>事業用自動車等連絡書の経由</td>
+                                <td></td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>事業用自動車の登録（車検）（コピーを行政書士に渡す）</td>
+                                <td class="checkmark">✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>任意保険の加入（コピーを行政書士に渡す）</td>
+                                <td class="checkmark">✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>社会保険への加入（コピーを行政書士に渡す）</td>
+                                <td class="checkmark">✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>運賃料金表の公示（営業所・ウェブサイト）</td>
+                                <td class="checkmark">✓</td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>運送約款の公示（営業所・ウェブサイト）</td>
+                                <td class="checkmark">✓</td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>運行管理規程の備付け</td>
+                                <td class="checkmark">✓</td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>整備管理規程の備付け</td>
+                                <td class="checkmark">✓</td>
+                                <td class="checkmark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>運転者の適性診断（初任）の受診</td>
+                                <td class="checkmark">✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>運転者の健康診断の受診</td>
+                                <td class="checkmark">✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>運転者に初任教育の実施</td>
+                                <td class="checkmark">✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>運転者に実施する年間教育計画の作成</td>
+                                <td class="checkmark">✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>乗務員等台帳の作成</td>
+                                <td class="checkmark">✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>点呼録画装置（自動点呼機器）、アルコールチェッカー等の設置</td>
+                                <td class="checkmark">✓</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 運輸開始届タブ -->
+            <div id="notification" class="tab-content">
+                <div class="section">
+                    <h2>運輸開始届の届出</h2>
+
+                    <h3>事業用施設等の写真提出要領</h3>
+
+                    <div class="photo-requirements">
+                        <h4>営業所</h4>
+                        <ul>
+                            <li>看板、表札等事業者名を確認できるものが含まれた事務所入口の外観が確認できるもの</li>
+                            <li>営業所として使用する部屋の内部が確認できるもの</li>
+                            <li>運賃料金表及び運送約款を公示した状況が確認できるもの</li>
+                        </ul>
+                    </div>
+
+                    <div class="photo-requirements">
+                        <h4>休憩睡眠施設</h4>
+                        <ul>
+                            <li>休憩睡眠施設として使用する部屋の内部が確認できるもの</li>
+                        </ul>
+                    </div>
+
+                    <div class="photo-requirements">
+                        <h4>自動車車庫</h4>
+                        <ul>
+                            <li>事業用自動車が格納された状態で、車庫の状況が概ね確認できるもの（別方向より複数枚）</li>
+                            <li>自動車車庫の出入口の状況が確認できるもの</li>
+                        </ul>
+                    </div>
+
+                    <div class="photo-requirements">
+                        <h4>事業用自動車（全車両）</h4>
+                        <ul>
+                            <li>自動車の前面及び左側面を撮影し、ナンバープレート、車体に表示された事業者名、「貸切」及び業務の範囲を限定する条件を付された場合にあっては「限定」の表示を確認できるもの</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert">
+                        <h4>写真に関する注意事項</h4>
+                        <p>写真についてはすべて日付入りのものを添付する。なお、なんらかの理由により写真に日付を入れることができない場合には、当該写真に撮影した日付を記入する。</p>
+                    </div>
+
+                    <div class="document-list">
+                        <h4>添付書面</h4>
+                        <ul>
+                            <li>メールアドレス</li>
+                            <li>車検証記録事項の写し</li>
+                            <li>事業の用に供する施設及び事業用自動車の写真</li>
+                            <li>任意保険証書の写し</li>
+                            <li>（健康保険・厚生年金保険）新規適用届（写）</li>
+                            <li>労働保険 / 保険関係成立届（写）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // すべてのタブコンテンツを非表示にする
+            const allTabContents = document.querySelectorAll('.tab-content');
+            allTabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // すべてのタブボタンの active クラスを削除
+            const allTabButtons = document.querySelectorAll('.tab-button');
+            allTabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // 選択されたタブコンテンツを表示
+            document.getElementById(tabId).classList.add('active');
+
+            // 対応するタブボタンに active クラスを追加
+            event.target.classList.add('active');
+        }
+
+        // ページ読み込み時の初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 最初のタブボタンをアクティブにする
+            const firstTabButton = document.querySelector('.tab-button');
+            if (firstTabButton) {
+                firstTabButton.classList.add('active');
+            }
+        });
+
+        // スムーズスクロール効果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // アニメーション効果の追加
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // セクションにアニメーション効果を適用
+        document.querySelectorAll('.section, .checklist, .document-list, .photo-requirements').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
