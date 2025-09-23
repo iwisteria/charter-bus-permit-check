@@ -426,7 +426,18 @@
                     </div>
 
                     <div style="text-align: center; margin-top: 32px;">
-                        <button onclick="document.querySelector('[onclick=&quot;showTab(&apos;documents&apos;)&quot;]').click(); window.scrollTo({top: 0, behavior: 'smooth'});" style="background: linear-gradient(135deg, #1f2f54, #2d4570); color: white; border: none; padding: 16px 32px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(31, 47, 84, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(31, 47, 84, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(31, 47, 84, 0.3)'">
+                        <button onclick="
+                            // すべてのタブコンテンツを非表示
+                            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                            // すべてのタブボタンの active クラスを削除
+                            document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+                            // 必要書類タブを表示
+                            document.getElementById('documents').classList.add('active');
+                            // 必要書類タブボタンをアクティブに
+                            document.querySelectorAll('.tab-button')[1].classList.add('active');
+                            // ページトップにスクロール
+                            setTimeout(() => { window.scrollTo({top: 0, behavior: 'smooth'}); }, 50);
+                        " style="background: linear-gradient(135deg, #1f2f54, #2d4570); color: white; border: none; padding: 16px 32px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(31, 47, 84, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(31, 47, 84, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(31, 47, 84, 0.3)'">
                             📋 必要書類を確認する
                         </button>
                     </div>
