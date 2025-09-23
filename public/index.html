@@ -27,34 +27,134 @@
         }
 
         .header {
-            text-align: center;
+            background: linear-gradient(135deg, #1f2f54 0%, #2d4570 100%);
             color: white;
             margin-bottom: 0;
-            padding: 60px 40px;
-            background: linear-gradient(135deg, #1f2f54 0%, #2d4570 100%);
-            border-bottom: 1px solid #e2e8f0;
             position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.02)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.02)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 0 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
-            max-width: 120px;
+            width: 180px;
             height: auto;
-            margin-bottom: 24px;
-            filter: brightness(1);
+            filter: brightness(1.1) drop-shadow(0 2px 8px rgba(0,0,0,0.1));
+            transition: transform 0.3s ease;
         }
 
-        .header h1 {
-            font-size: 2.75rem;
-            margin-bottom: 16px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .header-nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .header-nav a:hover {
             color: white;
         }
 
+        .header-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        .header-nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-content {
+            padding: 48px 0 64px 0;
+            text-align: left;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin: 0 0 24px 0;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: white;
+            line-height: 1.1;
+            text-shadow: 0 2px 16px rgba(0,0,0,0.15);
+            max-width: 800px;
+        }
+
         .header p {
-            font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.375rem;
+            color: rgba(255, 255, 255, 0.85);
             font-weight: 400;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 600px;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .header-badge:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .header-badge::before {
+            content: '✨';
+            margin-right: 8px;
         }
 
         .content {
@@ -285,17 +385,69 @@
             font-size: 1.125rem;
         }
 
-        @media (max-width: 768px) {
-            .header {
-                padding: 40px 20px;
+        @media (max-width: 1024px) {
+            .header-container {
+                padding: 0 32px;
+            }
+
+            .header-nav {
+                gap: 24px;
             }
 
             .header h1 {
-                font-size: 2.25rem;
+                font-size: 3rem;
+            }
+
+            .header p {
+                font-size: 1.25rem;
+            }
+
+            .logo {
+                width: 160px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 24px;
+            }
+
+            .header-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 24px;
+                padding: 20px 0 16px 0;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .header-content {
+                padding: 32px 0 48px 0;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+                line-height: 1.15;
+            }
+
+            .header p {
+                font-size: 1.125rem;
+            }
+
+            .logo {
+                width: 140px;
+            }
+
+            .header-badge {
+                font-size: 13px;
+                padding: 6px 14px;
+                margin-bottom: 24px;
             }
 
             .content {
-                padding: 24px 20px;
+                padding: 32px 24px;
             }
 
             .nav-tabs {
@@ -336,14 +488,50 @@
                 gap: 10px !important;
             }
         }
+
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 0 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .logo {
+                width: 120px;
+            }
+
+            .header-content {
+                padding: 24px 0 40px 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="new-gothic-logomark-white.png" alt="ロゴ" class="logo">
-            <h1>貸切バス許可新規取得可能性チェックリスト</h1>
-            <p>許可取得から運輸開始までの完全ガイド</p>
+            <div class="header-container">
+                <div class="header-top">
+                    <img src="new-gothic-logomark-white.png" alt="貸切バス専門行政書士" class="logo">
+                    <nav class="header-nav">
+                        <a href="#check">確認事項</a>
+                        <a href="#documents">必要書類</a>
+                        <a href="#preparation">準備</a>
+                        <a href="#after-permit">許可後手続き</a>
+                        <a href="https://busguardian.tokyo/contact/" target="_blank">お問い合わせ</a>
+                    </nav>
+                </div>
+                <div class="header-content">
+                    <div class="header-badge">専門行政書士による完全ガイド</div>
+                    <h1>貸切バス許可新規取得可能性チェックリスト</h1>
+                    <p>許可取得から運輸開始までの全プロセスを、専門行政書士が徹底解説。確実な許可取得をサポートします。</p>
+                </div>
+            </div>
         </div>
 
         <div class="content">
