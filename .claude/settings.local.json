@@ -5,7 +5,12 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Read(//Users/mflmacmini20141227/Downloads/**)",
-      "Bash(open:*)"
+      "Bash(open:*)",
+      "Bash(mkdir:*)",
+      "Bash(convert:*)",
+      "Bash(magick:*)",
+      "Bash(mv:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []
